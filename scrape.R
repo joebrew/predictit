@@ -1,3 +1,13 @@
+# Favorite longshot bias
+
+#####
+# PREDICT WISE
+#####
+# http://www.predictwise.com/
+
+#####
+# PREDICT IT
+#####
 library(rvest)
 
 # Start session
@@ -13,6 +23,12 @@ session2 <- submit_form(session, form)
 
 # See main page
 main_page <- read_html('https://www.predictit.org/Browse/Featured')
+
+# Ticker
+ticker <- 
+  read_html('https://www.predictit.org/Browse/NewArrivals') %>%
+  html_nodes(xpath = '//b | //span') %>%
+  html_text()
 
 # Polls
 polls <- 
