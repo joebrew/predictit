@@ -1,9 +1,47 @@
+library(rvest)
+library(XML)
 # Favorite longshot bias
+
+#####
+# BETFAIR
+#####
+# https://developer.betfair.com/
+
+#####
+# SMARKETS
+#####
+# http://smarkets.s3.amazonaws.com/oddsfeed.xml
 
 #####
 # PREDICT WISE
 #####
 # http://www.predictwise.com/
+
+poll_page <- 'http://www.predictwise.com/politics/2016RepNomination'
+poll_html <- read_html(poll_page)
+
+# Get links to html tables
+table_urls <- 
+  poll_html %>%
+  html_nodes('div iframe') %>%
+  html_attr('src')
+
+# Go to link and read table
+table_url <- table_urls[2]
+x <- table_url %>%
+  read_html() %>%
+  html_nodes('.pw_table') 
+
+readHTMLTable(htmlParse(table_url))
+srts<-htmlParse(table_url)
+class(srts)
+
+srts.table<- readHTMLTable(srts,stringsAsFactors = FALSE)
+
+#####
+# HUFFPOST POLLSTER API
+#####
+# http://elections.huffingtonpost.com/pollster/api
 
 #####
 # PREDICT IT
